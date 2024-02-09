@@ -54,14 +54,13 @@ const run = async () => {
     // status update
     app.put("/ourservice/:id", async (req, res) => {
       const id = req.params.id;
-      const ourservice = req.body;
+      const item = req.body;
       const filter = { _id: new ObjectId(id) };
       const updateDoc = {
         $set: {
-          isCompleted: ourservice.isCompleted,
-          title: ourservice.title,
-          description: ourservice.description,
-          priority: ourservice.priority,
+          imgurl: item.imgurl,
+          name: item.name,
+          // item1:item.item1,
         },
       };
       const options = { upsert: true };
