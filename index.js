@@ -60,7 +60,11 @@ const run = async () => {
         $set: {
           imgurl: item.imgurl,
           name: item.name,
-          // item1:item.item1,
+          item1: item.item1,
+          item1: item.item2,
+          item1: item.item3,
+          item1: item.item4,
+          item1: item.item5,
         },
       };
       const options = { upsert: true };
