@@ -113,7 +113,7 @@ const run = async () => {
       const updateDoc = {
         $set: {
           eventimgurl: eventitem.eventimgurl,
-          EvnentName: eventitem.EvnentName,
+          EventName: eventitem.EventName,
         },
       };
       const options = { upsert: true };
