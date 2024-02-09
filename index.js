@@ -112,10 +112,8 @@ const run = async () => {
       const filter = { _id: new ObjectId(id) };
       const updateDoc = {
         $set: {
-          isCompleted: eventitem.isCompleted,
-          title: eventitem.title,
-          description: eventitem.description,
-          priority: eventitem.priority,
+          eventimgurl: eventitem.eventimgurl,
+          EvnentName: eventitem.EvnentName,
         },
       };
       const options = { upsert: true };
