@@ -61,10 +61,10 @@ const run = async () => {
           imgurl: item.imgurl,
           name: item.name,
           item1: item.item1,
-          item1: item.item2,
-          item1: item.item3,
-          item1: item.item4,
-          item1: item.item5,
+          item2: item.item2,
+          item3: item.item3,
+          item4: item.item4,
+          item15: item.item5,
         },
       };
       const options = { upsert: true };
