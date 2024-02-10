@@ -59,6 +59,7 @@ const run = async () => {
       const updateDoc = {
         $set: {
           imgurl: item.imgurl,
+          paragraph: item.paragraph,
           name: item.name,
           item1: item.item1,
           item2: item.item2,
