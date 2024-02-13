@@ -168,68 +168,12 @@ const run = async () => {
       const filter = { _id: new ObjectId(id) };
       const updateDoc = {
         $set: {
-          isCompleted: recentevent.isCompleted,
-          title: recentevent.title,
-          description: recentevent.description,
-          priority: recentevent.priority,
+          recenteventimgurl: recentevent.recenteventimgurl,
+          deatails: recentevent.deatails,
         },
       };
       const options = { upsert: true };
       const result = await RecentEventCollection.updateOne(
-        filter,
-        updateDoc,
-        options
-      );
-      res.json(result);
-    });
-
-    // For Customer Reviews-----------------------------------------------------
-    const CustomerReviewCollection = db.collection("CustomerReviews");
-    app.get("/customerreviews", async (req, res) => {
-      let query = {};
-      if (req.query.priority) {
-        query.priority = req.query.priority;
-      }
-      const cursor = CustomerReviewCollection.find(query);
-      const event = await cursor.toArray();
-      res.send({ status: true, data: event });
-    });
-    app.post("/customerreviews", async (req, res) => {
-      const customerreviews = req.body;
-      const result = await CustomerReviewCollection.insertOne(customerreviews);
-      res.send(result);
-      console.log(result);
-    });
-    app.get("/customerreviews/:id", async (req, res) => {
-      const id = req.params.id;
-      const result = await CustomerReviewCollection.findOne({
-        _id: new ObjectId(id),
-      });
-      res.send(result);
-    });
-    app.delete("/customerreviews/:id", async (req, res) => {
-      const id = req.params.id;
-      const result = await CustomerReviewCollection.deleteOne({
-        _id: new ObjectId(id),
-      });
-      console.log(result);
-      res.send(result);
-    });
-
-    app.put("/customerreviews/:id", async (req, res) => {
-      const id = req.params.id;
-      const customerreviews = req.body;
-      const filter = { _id: new ObjectId(id) };
-      const updateDoc = {
-        $set: {
-          isCompleted: customerreviews.isCompleted,
-          title: customerreviews.title,
-          description: customerreviews.description,
-          priority: customerreviews.priority,
-        },
-      };
-      const options = { upsert: true };
-      const result = await CustomerReviewCollection.updateOne(
         filter,
         updateDoc,
         options
