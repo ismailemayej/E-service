@@ -180,6 +180,16 @@ const run = async () => {
       );
       res.json(result);
     });
+    // Email Subcribtion
+    const emailaddedCollection = db.collection("SubCriobtionEmails");
+    app.post("/emailsubcribtion", async (req, res) => {
+      const SubcriobtionEmailList = req.body;
+      const result = await emailaddedCollection.insertOne(
+        SubcriobtionEmailList
+      );
+      res.send(result);
+      console.log(result);
+    });
   } finally {
   }
 };
