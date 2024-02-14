@@ -190,6 +190,59 @@ const run = async () => {
       res.send(result);
       console.log(result);
     });
+    // Reecent blog and news ------------------------------------
+    const BlogAndNewsCollection = db.collection("BlogAndNews");
+    app.get("/blogandnews", async (req, res) => {
+      let query = {};
+      if (req.query.priority) {
+        query.priority = req.query.priority;
+      }
+      const cursor = BlogAndNewsCollection.find(query);
+      const blogandnews = await cursor.toArray();
+      res.send({ status: true, data: blogandnews });
+    });
+    app.post("/blogandnews", async (req, res) => {
+      const bodydata = req.body;
+      const result = await BlogAndNewsCollection.insertOne(bodydata);
+      res.send(result);
+      console.log(result);
+    });
+    app.get("/blogandnews/:id", async (req, res) => {
+      const id = req.params.id;
+      const result = await BlogAndNewsCollection.findOne({
+        _id: new ObjectId(id),
+      });
+      res.send(result);
+    });
+    app.delete("/blogandnews/:id", async (req, res) => {
+      const id = req.params.id;
+      const result = await BlogAndNewsCollection.deleteOne({
+        _id: new ObjectId(id),
+      });
+      console.log(result);
+      res.send(result);
+    });
+    // status update
+    app.put("/blogandnews/:id", async (req, res) => {
+      const id = req.params.id;
+      const item = req.body;
+      const filter = { _id: new ObjectId(id) };
+      const updateDoc = {
+        $set: {
+          headline: item.headline,
+          blogimgurl: item.blogimgurl,
+          catgory: item.catgory,
+          news: item.news,
+        },
+      };
+      const options = { upsert: true };
+      const result = await BlogAndNewsCollection.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
+      res.json(result);
+    });
   } finally {
   }
 };
